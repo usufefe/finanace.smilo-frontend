@@ -105,6 +105,21 @@ export const resetPassword =
     }
   };
 
+export const loginSuccess = (userData) => (dispatch) => {
+  const auth_state = {
+    current: userData,
+    isLoggedIn: true,
+    isLoading: false,
+    isSuccess: true,
+  };
+  window.localStorage.setItem('auth', JSON.stringify(auth_state));
+  window.localStorage.removeItem('isLogout');
+  dispatch({
+    type: actionTypes.REQUEST_SUCCESS,
+    payload: userData,
+  });
+};
+
 export const logout = () => async (dispatch) => {
   dispatch({
     type: actionTypes.LOGOUT_SUCCESS,
